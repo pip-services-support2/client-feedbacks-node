@@ -1,9 +1,9 @@
 import { ConfigParams } from 'pip-services3-commons-nodex';
 
 import { FeedbacksClientFixtureV1 } from './FeedbacksClientFixtureV1';
-import { FeedbacksLambdaClientV1 } from '../../src/version1/FeedbacksLambdaClientV1';
+import { FeedbacksCommandableLambdaClientV1 } from '../../src/version1/FeedbacksCommandableLambdaClientV1';
 
-suite('FeedbacksLambdaClient', ()=> {
+suite('FeedbacksCommandabletLambdaClient', ()=> {
     let AWS_LAMDBA_ARN = process.env["AWS_LAMDBA_ARN"] || "";
     let AWS_ACCESS_ID = process.env["AWS_ACCESS_ID"] || "";
     let AWS_ACCESS_KEY = process.env["AWS_ACCESS_KEY"] || "";
@@ -24,11 +24,11 @@ suite('FeedbacksLambdaClient', ()=> {
     if (lambdaConfig.getAsNullableString("connection.protocol") != "aws")
         return;
 
-    let client: FeedbacksLambdaClientV1;
+    let client: FeedbacksCommandableLambdaClientV1;
     let fixture: FeedbacksClientFixtureV1;
 
     setup(async () => {
-        client = new FeedbacksLambdaClientV1();
+        client = new FeedbacksCommandableLambdaClientV1();
         client.configure(lambdaConfig);
 
         fixture = new FeedbacksClientFixtureV1(client);

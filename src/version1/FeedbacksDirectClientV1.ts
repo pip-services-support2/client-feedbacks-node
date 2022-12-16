@@ -24,12 +24,12 @@ export class FeedbacksDirectClientV1 extends DirectClient<any> implements IFeedb
         let timing = this.instrument(correlationId, 'feedbacks.get_feedbacks');
 
         try {
-            return await this._controller.getFeedbacks(correlationId, filter, paging);
+            let res = await this._controller.getFeedbacks(correlationId, filter, paging);
+            timing.endTiming();
+            return res;
         } catch (err) {
             timing.endFailure(err);
             throw err;
-        } finally {
-            timing.endTiming();
         }
     }
 
@@ -37,12 +37,12 @@ export class FeedbacksDirectClientV1 extends DirectClient<any> implements IFeedb
         let timing = this.instrument(correlationId, 'feedbacks.get_feedback_by_id');
 
         try {
-            return await this._controller.getFeedbackById(correlationId, feedbackId);
+            let res = await this._controller.getFeedbackById(correlationId, feedbackId);
+            timing.endTiming();
+            return res;
         } catch (err) {
             timing.endFailure(err);
             throw err;
-        } finally {
-            timing.endTiming();
         }
     }
 
@@ -50,12 +50,12 @@ export class FeedbacksDirectClientV1 extends DirectClient<any> implements IFeedb
         let timing = this.instrument(correlationId, 'feedbacks.send_feedback');
 
         try {
-            return await this._controller.sendFeedback(correlationId, feedback, user);
+            let res = await this._controller.sendFeedback(correlationId, feedback, user);
+            timing.endTiming();
+            return res;
         } catch (err) {
             timing.endFailure(err);
             throw err;
-        } finally {
-            timing.endTiming();
         }
     }
 
@@ -63,12 +63,12 @@ export class FeedbacksDirectClientV1 extends DirectClient<any> implements IFeedb
         let timing = this.instrument(correlationId, 'feedbacks.reply_feedback');
 
         try {
-            return await this._controller.replyFeedback(correlationId, feedbackId, reply, user);
+            let res = await this._controller.replyFeedback(correlationId, feedbackId, reply, user);
+            timing.endTiming();
+            return res;
         } catch (err) {
             timing.endFailure(err);
             throw err;
-        } finally {
-            timing.endTiming();
         }
     }
 
@@ -76,12 +76,12 @@ export class FeedbacksDirectClientV1 extends DirectClient<any> implements IFeedb
         let timing = this.instrument(correlationId, 'feedbacks.delete_feedback_by_id');
 
         try {
-            return await this._controller.deleteFeedbackById(correlationId, feedbackId);
+            let res = await this._controller.deleteFeedbackById(correlationId, feedbackId);
+            timing.endTiming();
+            return res;
         } catch (err) {
             timing.endFailure(err);
             throw err;
-        } finally {
-            timing.endTiming();
         }
     }
 

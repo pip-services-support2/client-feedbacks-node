@@ -5,8 +5,8 @@ import { ConsoleLogger } from 'pip-services3-components-nodex';
 
 import { FeedbacksMemoryPersistence } from 'service-feedbacks-node';
 import { FeedbacksController } from 'service-feedbacks-node';
-import { FeedbacksHttpServiceV1 } from 'service-feedbacks-node';
-import { FeedbacksHttpClientV1 } from '../../src/version1/FeedbacksHttpClientV1';
+import { FeedbacksCommandableHttpServiceV1 } from 'service-feedbacks-node';
+import { FeedbacksCommandableHttpClientV1 } from '../../src/version1/FeedbacksCommandableHttpClientV1';
 import { FeedbacksClientFixtureV1 } from './FeedbacksClientFixtureV1';
 
 var httpConfig = ConfigParams.fromTuples(
@@ -15,9 +15,9 @@ var httpConfig = ConfigParams.fromTuples(
     "connection.port", 3000
 );
 
-suite('FeedbacksHttpClientV1', ()=> {
-    let service: FeedbacksHttpServiceV1;
-    let client: FeedbacksHttpClientV1;
+suite('FeedbacksCommandableHttpClientV1', ()=> {
+    let service: FeedbacksCommandableHttpServiceV1;
+    let client: FeedbacksCommandableHttpClientV1;
     let fixture: FeedbacksClientFixtureV1;
 
     suiteSetup(async () => {
@@ -25,19 +25,19 @@ suite('FeedbacksHttpClientV1', ()=> {
         let persistence = new FeedbacksMemoryPersistence();
         let controller = new FeedbacksController();
 
-        service = new FeedbacksHttpServiceV1();
+        service = new FeedbacksCommandableHttpServiceV1();
         service.configure(httpConfig);
 
         let references: References = References.fromTuples(
             new Descriptor('pip-services', 'logger', 'console', 'default', '1.0'), logger,
             new Descriptor('service-feedbacks', 'persistence', 'memory', 'default', '1.0'), persistence,
             new Descriptor('service-feedbacks', 'controller', 'default', 'default', '1.0'), controller,
-            new Descriptor('service-feedbacks', 'service', 'http', 'default', '1.0'), service
+            new Descriptor('service-feedbacks', 'service', 'commandable-http', 'default', '1.0'), service
         );
         controller.setReferences(references);
         service.setReferences(references);
 
-        client = new FeedbacksHttpClientV1();
+        client = new FeedbacksCommandableHttpClientV1();
         client.setReferences(references);
         client.configure(httpConfig);
 
